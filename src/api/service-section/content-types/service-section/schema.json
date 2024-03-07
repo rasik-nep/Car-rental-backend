@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "service_sections",
+  "info": {
+    "singularName": "service-section",
+    "pluralName": "service-sections",
+    "displayName": "ServiceSection",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "first_span": {
+      "type": "string",
+      "required": true
+    },
+    "second_span": {
+      "type": "string",
+      "required": true
+    },
+    "descriptionShort": {
+      "type": "text",
+      "required": true
+    },
+    "descriptionLong": {
+      "type": "text",
+      "required": true
+    }
+  }
+}
