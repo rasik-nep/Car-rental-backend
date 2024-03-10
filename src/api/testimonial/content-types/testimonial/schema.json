@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "reviews",
+  "collectionName": "testimonials",
   "info": {
-    "singularName": "review",
-    "pluralName": "reviews",
-    "displayName": "Review",
+    "singularName": "testimonial",
+    "pluralName": "testimonials",
+    "displayName": "Testimonial",
     "description": ""
   },
   "options": {
@@ -14,33 +14,28 @@
   "attributes": {
     "name": {
       "type": "string",
-      "required": true,
-      "unique": true
+      "required": true
+    },
+    "job": {
+      "type": "string"
+    },
+    "review_desc": {
+      "type": "text",
+      "required": true
     },
     "review_star": {
       "type": "integer",
       "required": true,
-      "min": 1,
+      "min": 0,
       "max": 5
     },
-    "job": {
-      "type": "string",
-      "required": false
-    },
-    "image": {
+    "img": {
       "type": "media",
       "multiple": false,
       "required": false,
       "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
+        "images"
       ]
-    },
-    "reviewDesc": {
-      "type": "blocks",
-      "required": true
     }
   }
 }

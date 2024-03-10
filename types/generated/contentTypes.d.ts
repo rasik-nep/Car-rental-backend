@@ -858,49 +858,6 @@ export interface ApiPricePrice extends Schema.CollectionType {
   };
 }
 
-export interface ApiReviewReview extends Schema.CollectionType {
-  collectionName: 'reviews';
-  info: {
-    singularName: 'review';
-    pluralName: 'reviews';
-    displayName: 'Review';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required & Attribute.Unique;
-    review_star: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-          max: 5;
-        },
-        number
-      >;
-    job: Attribute.String;
-    image: Attribute.Media;
-    reviewDesc: Attribute.Blocks & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::review.review',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::review.review',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiServiceSectionServiceSection extends Schema.CollectionType {
   collectionName: 'service_sections';
   info: {
@@ -915,8 +872,8 @@ export interface ApiServiceSectionServiceSection extends Schema.CollectionType {
   attributes: {
     first_span: Attribute.String & Attribute.Required;
     second_span: Attribute.String & Attribute.Required;
-    descriptionShort: Attribute.Text & Attribute.Required;
-    descriptionLong: Attribute.Text & Attribute.Required;
+    description_short: Attribute.Text & Attribute.Required;
+    description_long: Attribute.Text & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -928,6 +885,49 @@ export interface ApiServiceSectionServiceSection extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::service-section.service-section',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTestimonialTestimonial extends Schema.CollectionType {
+  collectionName: 'testimonials';
+  info: {
+    singularName: 'testimonial';
+    pluralName: 'testimonials';
+    displayName: 'Testimonial';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    job: Attribute.String;
+    review_desc: Attribute.Text & Attribute.Required;
+    review_star: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+          max: 5;
+        },
+        number
+      >;
+    img: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::testimonial.testimonial',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::testimonial.testimonial',
       'oneToOne',
       'admin::user'
     > &
@@ -955,8 +955,8 @@ declare module '@strapi/types' {
       'plugin::i18n.locale': PluginI18NLocale;
       'api::page-text.page-text': ApiPageTextPageText;
       'api::price.price': ApiPricePrice;
-      'api::review.review': ApiReviewReview;
       'api::service-section.service-section': ApiServiceSectionServiceSection;
+      'api::testimonial.testimonial': ApiTestimonialTestimonial;
     }
   }
 }
