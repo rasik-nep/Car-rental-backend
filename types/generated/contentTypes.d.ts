@@ -788,6 +788,42 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiContactDetailContactDetail extends Schema.SingleType {
+  collectionName: 'contact_details';
+  info: {
+    singularName: 'contact-detail';
+    pluralName: 'contact-details';
+    displayName: 'Contact_detail';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    facebook: Attribute.String;
+    Instagram: Attribute.String;
+    whatsapp: Attribute.String;
+    email: Attribute.String & Attribute.Required;
+    location: Attribute.String & Attribute.Required;
+    phone: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::contact-detail.contact-detail',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::contact-detail.contact-detail',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPageTextPageText extends Schema.SingleType {
   collectionName: 'page_texts';
   info: {
@@ -953,6 +989,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::contact-detail.contact-detail': ApiContactDetailContactDetail;
       'api::page-text.page-text': ApiPageTextPageText;
       'api::price.price': ApiPricePrice;
       'api::service-section.service-section': ApiServiceSectionServiceSection;
