@@ -824,6 +824,38 @@ export interface ApiContactDetailContactDetail extends Schema.SingleType {
   };
 }
 
+export interface ApiHeroHero extends Schema.SingleType {
+  collectionName: 'heroes';
+  info: {
+    singularName: 'hero';
+    pluralName: 'heroes';
+    displayName: 'Hero';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    image: Attribute.Media & Attribute.Required;
+    welcome: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'WELCOME TO'>;
+    company_name: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Shan Vehicle Rental'>;
+    company_slogan: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Vehicle Rental Service'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::hero.hero', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::hero.hero', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPageTextPageText extends Schema.SingleType {
   collectionName: 'page_texts';
   info: {
@@ -990,6 +1022,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
       'api::contact-detail.contact-detail': ApiContactDetailContactDetail;
+      'api::hero.hero': ApiHeroHero;
       'api::page-text.page-text': ApiPageTextPageText;
       'api::price.price': ApiPricePrice;
       'api::service-section.service-section': ApiServiceSectionServiceSection;
