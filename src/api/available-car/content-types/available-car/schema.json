@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "available_cars",
+  "info": {
+    "singularName": "available-car",
+    "pluralName": "available-cars",
+    "displayName": "available_car"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "photo": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}
