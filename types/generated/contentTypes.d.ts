@@ -867,7 +867,7 @@ export interface ApiContactDetailContactDetail extends Schema.SingleType {
   };
   attributes: {
     facebook: Attribute.String;
-    Instagram: Attribute.String;
+    instagram: Attribute.String;
     whatsapp: Attribute.String;
     email: Attribute.String & Attribute.Required;
     location: Attribute.String & Attribute.Required;
@@ -883,6 +883,44 @@ export interface ApiContactDetailContactDetail extends Schema.SingleType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::contact-detail.contact-detail',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiFeatureFeature extends Schema.CollectionType {
+  collectionName: 'features';
+  info: {
+    singularName: 'feature';
+    pluralName: 'features';
+    displayName: 'Feature';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        maxLength: 30;
+      }>;
+    description: Attribute.Text & Attribute.Required;
+    image: Attribute.Media & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::feature.feature',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::feature.feature',
       'oneToOne',
       'admin::user'
     > &
@@ -992,6 +1030,40 @@ export interface ApiPricePrice extends Schema.CollectionType {
   };
 }
 
+export interface ApiServiceService extends Schema.CollectionType {
+  collectionName: 'services';
+  info: {
+    singularName: 'service';
+    pluralName: 'services';
+    displayName: 'service';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text;
+    image: Attribute.Media;
+    caption: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::service.service',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::service.service',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiServiceSectionServiceSection extends Schema.CollectionType {
   collectionName: 'service_sections';
   info: {
@@ -1039,18 +1111,7 @@ export interface ApiTestimonialTestimonial extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String & Attribute.Required;
-    job: Attribute.String;
     review_desc: Attribute.Text & Attribute.Required;
-    review_star: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-          max: 5;
-        },
-        number
-      >;
-    img: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1090,9 +1151,11 @@ declare module '@strapi/types' {
       'api::about.about': ApiAboutAbout;
       'api::available-car.available-car': ApiAvailableCarAvailableCar;
       'api::contact-detail.contact-detail': ApiContactDetailContactDetail;
+      'api::feature.feature': ApiFeatureFeature;
       'api::hero.hero': ApiHeroHero;
       'api::page-text.page-text': ApiPageTextPageText;
       'api::price.price': ApiPricePrice;
+      'api::service.service': ApiServiceService;
       'api::service-section.service-section': ApiServiceSectionServiceSection;
       'api::testimonial.testimonial': ApiTestimonialTestimonial;
     }

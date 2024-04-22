@@ -16,26 +16,9 @@
       "type": "string",
       "required": true
     },
-    "job": {
-      "type": "string"
-    },
     "review_desc": {
       "type": "text",
       "required": true
-    },
-    "review_star": {
-      "type": "integer",
-      "required": true,
-      "min": 0,
-      "max": 5
-    },
-    "img": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ]
     }
   }
 }
